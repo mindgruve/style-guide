@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.3.3
+- Fix invalid paths set up for twig bug
+
 ## 1.3.2
 - Add git support
 

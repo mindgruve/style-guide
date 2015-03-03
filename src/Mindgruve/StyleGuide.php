@@ -34,8 +34,8 @@ class StyleGuide
     private function setupTwig()
     {
         $paths = array(
-            realpath('../www/markup'),//deprecated
-            realpath('../views')
+            realpath(dirname(dirname(__DIR__)) . '/www/markup'),//deprecated
+            realpath(dirname(dirname(__DIR__)) . '/views')
         );
 
         if (array_key_exists('markupPath', $this->configVariables)) {
@@ -307,7 +307,8 @@ class StyleGuide
         }
     }
 
-    function templateExists($templateName) {
+    function templateExists($templateName)
+    {
         return $this->twigLoader->exists($templateName);
     }
 }
