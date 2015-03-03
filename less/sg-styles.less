@@ -1,0 +1,332 @@
+/* -------------------------------------------------------------------------
+
+ Style Guide Boilerplate v2.0.1
+ Repo: https://github.com/bjankord/Style-Guide-Boilerplate
+ Author: Brett Jankord
+ License: MIT
+
+---------------------------------------------------------------------------- */
+
+@import "bootstrap-custom.less";
+
+/* -------------------------------------------------------------------------
+ Layout
+---------------------------------------------------------------------------- */
+body {
+  margin: 0;
+  padding-top: 70px;
+}
+
+@media (max-width: 767px) {
+  body {
+    padding-top: 125px;
+  }
+}
+
+/* -------------------------------------------------------------------------
+ Utility Classes
+---------------------------------------------------------------------------- */
+.sg-container {
+//  overflow: hidden;
+//  padding: 16px 24px;/* For older browsers */
+//  padding: 1rem 1.5rem;
+}
+
+.sg-animated {
+  .transition(all 0.6s ease-out);
+}
+
+.sg-hide {
+  display: none;
+}
+
+/* -------------------------------------------------------------------------
+ Modules
+---------------------------------------------------------------------------- */
+/* Headings
+---------------------------------------------------------------------------- */
+.sg-h1,
+.sg-h2,
+.sg-h3 {
+  border-bottom: 1px solid #ddd;
+  font-weight: normal;
+  margin-bottom: 1em;
+  margin-top: 0;
+}
+
+.sg-h1 {
+  font-weight: bold;
+  padding-bottom: .2em;
+  margin-top: 1.5em;
+}
+
+.sg-h2 {
+  margin-bottom: .5em;
+  padding-bottom: .5em;
+  text-transform: capitalize;
+  margin-top: 1.5em;
+}
+
+/* Buttons
+---------------------------------------------------------------------------- */
+.sg-btn {
+  float: left;
+  text-shadow: none !important;
+}
+
+.sg-btn--top {
+  float: right;
+}
+
+.sg-scroll-menu {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  -moz-overflow-scrolling: touch;
+  -ms-overflow-scrolling: touch;
+  -o-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+  width: 100%;
+  max-height: 500px;
+}
+
+.sg-dropdown-header {
+  text-transform: uppercase;
+}
+
+.sg-btn--select {
+  border-radius: 0 0.3em;
+  position: absolute;
+  right: 5px;
+  top: 14px;
+}
+
+.sg-btn--select.is-active:hover:after {
+  background: #111;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 5px;
+  top: 45px;
+  color: #fff;
+  content: "Selected code ready to be copied";
+  font-size: .8em;
+  display: block;
+  right: 5px;
+  padding: 5px 15px;
+  position: absolute;
+  white-space: nowrap;
+  z-index: 98;
+}
+
+.sg-btn--select.is-active:hover:before {
+  border: solid;
+  border-color: #111 transparent;
+  border-width: 0 6px 6px 6px;
+  top: 40px;
+  content: "";
+  display: block;
+  left: 75%;
+  position: absolute;
+  z-index: 99;
+}
+
+/* Hide specific buttons for use with JS */
+.sg-btn--source {
+  clear: both;
+}
+
+.sg-btn--source,
+.sg-btn--select {
+  display: none;
+}
+
+/* Show specific buttons if JS enabled */
+.js .sg-btn--source,
+.js .sg-btn--select {
+  display: block;
+}
+
+/* Hide specific buttons conditionally */
+.operamini .sg-btn--source,
+.legacy .sg-btn--source {
+  display: none;
+}
+
+/* Sections
+---------------------------------------------------------------------------- */
+.sg-section {
+  margin-bottom: 32px;
+  /* For older browsers */
+  margin-bottom: 3rem;
+  overflow: hidden;
+}
+
+.sg-anchor {
+  display: block;
+  padding-top: 1em;
+}
+
+/* Colors
+---------------------------------------------------------------------------- */
+.sg-color {
+  background: #fff;
+  border: 1px solid #b3b3b3;
+  display: inline-block;
+  height: 80px;
+  margin: 0 .5em .5em 0;
+  padding: 5px;
+  position: relative;
+  width: 100px;
+}
+
+.sg-lg {
+  width: 140px;
+  height: 100px;
+}
+
+.sg-color-swatch {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.sg-color-swatch span,
+.sg-color .sg-label {
+  background: #000;
+  background: rgba(0, 0, 0, 0.7);
+  bottom: 5px;
+  color: #fff;
+  font-size: 12px;
+  margin: 0;
+  opacity: 0;
+  padding: 5px 0;
+  position: absolute;
+  text-align: center;
+  text-transform: uppercase;
+  width: 88px;
+}
+
+.sg-color .sg-label {
+  bottom: 0;
+  left: 0;
+  opacity: 1;
+  width: 98px;
+}
+
+.sg-color.sg-lg .sg-label {
+  width: 138px;
+}
+
+.sg-color.sg-lg .sg-color-swatch span {
+  width: 128px;
+}
+
+.sg-color-swatch:hover span {
+  opacity: 1;
+}
+
+/* -------------------------------------------------------------------------
+ Colors
+---------------------------------------------------------------------------- */
+.sg-brand-primary .sg-color-swatch {
+  background: #bbbbbb;
+}
+
+.sg-gray-lighter .sg-color-swatch {
+  background: #dddddd;
+}
+
+.sg-gray-light .sg-color-swatch {
+  background: #808080;
+}
+
+.sg-gray .sg-color-swatch {
+  background: #555555;
+}
+
+.sg-gray-dark .sg-color-swatch {
+  background: #333333;
+}
+
+.sg-gray-darker .sg-color-swatch {
+  background: #222222;
+}
+
+.sg-brand-success .sg-color-swatch {
+  background: #469408;
+}
+
+.sg-brand-info .sg-color-swatch {
+  background: #029acf;
+}
+
+.sg-brand-warning .sg-color-swatch {
+  background: #9b479f;
+}
+
+.sg-brand-danger .sg-color-swatch {
+  background: #d9831f;
+}
+
+/* Fonts
+---------------------------------------------------------------------------- */
+.sg-font {
+  font-size: 1.8em;
+  padding: 0 0 .2em 0;
+}
+
+.sg-font-primary {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.sg-font-secondary {
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+/* Grid
+---------------------------------------------------------------------------- */
+.show-grid {
+  padding: .5em 0;
+}
+
+.show-grid div {
+  background-color: #dddddd;
+  border: 1px solid #808080;
+  padding: 0.5em;
+}
+
+/* Markup
+---------------------------------------------------------------------------- */
+.sg-markup-controls {
+  overflow: hidden;
+  padding-top: 1.5em;
+  clear: both;
+}
+
+.sg-source {
+  position: relative;
+}
+
+.sg-source pre {
+  background: #333;
+  border-radius: .5em;
+  border: 1px solid #ddd;
+  color: #fff;
+  overflow-x: scroll;
+  padding: .5em .3em;
+}
+
+.sg-source pre code {
+  background: transparent;
+}
+
+.js .sg-source {
+  max-height: 0;
+  overflow: hidden;
+}
+
+.js .sg-source.is-active,
+.operamini .sg-source,
+.legacy .sg-source {
+  max-height: 2400px;
+}
+
+@import "prettyprint.less";

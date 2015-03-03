@@ -1,0 +1,29 @@
+{% for section in config['sections'] %}
+    {% if config[section[0]] is defined %}
+        <div class="sg-row">
+            <h1 class="sg-col-sm-12">{{ section[1] }}</h1>
+            {% for file in config[section[0]] %}
+                <div class="sg-col-lg-12 sg-section" id="sg-{{ file|sgFilename }}">
+                    {% if file is sgExist %}
+                        <div class="sg-display">
+                            <h2 class="sg-h2">{{ file|sgTitle }}</h2>
+                            {% include file %}
+                        </div>
+                        <!--/.sg-display-->
+                        {% if extra['showSource'] is defined and extra['showSource'] %}
+                            <div class="sg-markup-controls">
+                                <a class="btn btn-primary sg-btn sg-btn--source" href="#">View Source</a>
+                            </div>
+                            <div class="sg-source sg-animated">
+                                {#<a class="btn btn-default sg-btn sg-btn--select" href="#">Copy Source</a>#}
+                                <pre class="prettyprint linenums"><code>{% filter escape %}{% include file ignore missing %}{% endfilter %}</code></pre>
+                            </div><!--/.sg-source-->
+                        {% endif %}
+                    {% else %}
+                        <div class="alert alert-danger">Oh no! You tried to include {{ file }} but I couldn't find it.</div>
+                    {% endif %}
+                </div><!--/.sg-section-->
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endfor %}

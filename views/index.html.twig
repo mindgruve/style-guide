@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <title>{{ config['name'] }} Style Guide</title>
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="bin/sg-styles{{ extra['useMinified'] ? '.min' : '' }}.css">
+    {% if config['stylesheets'] is defined %}
+        {% for stylesheet in config['stylesheets'] %}
+            <link rel="stylesheet" href="{{ stylesheet }}"/>
+        {% endfor %}
+    {% endif %}
+</head>
+<body data-spy="scroll" data-target=".navbar-default" data-offset="60">
+{% if config['name'] is not defined %}
+    <h1 class="alert alert-danger">
+        SET UP YOUR CONFIG FILE!
+        <small>Use config.default.ini to get started</small>
+    </h1>
+{% else %}
+
+    <!-- Fixed navbar -->
+    <div class="sg-header sg-navbar sg-navbar-default sg-navbar-fixed-top" role="navigation">
+        <div class="sg-container">
+            <div class="sg-navbar-header">
+                <a class="sg-navbar-brand" href="#"><strong>{{ config['name'] }}</strong> Style Guide</a>
+            </div>
+            {% include 'includes/sg-menu.html.twig' %}
+        </div>
+    </div>
+    <!--/.sg-header-->
+
+    <div id="top" class="sg-body sg-container">
+        <h1 id="sg-no-jquery" class="sg-hide alert alert-danger">
+            You need jQuery to use the style guide! Make sure you have config.ini set up correctly.
+        </h1>
+        {% include 'includes/sg-sections.html.twig' %}
+    </div>
+    <!--/.sg-body-->
+    {% if config['requireBaseUrl'] is defined %}
+        <script type='text/javascript'>
+            var require = {"baseUrl": "{{ config['requireBaseUrl'] }}"};
+        </script>
+    {% elseif config['prescript'] is defined %}
+        <script type='text/javascript'>
+            {{ config['prescript']|raw }}
+        </script>
+    {% endif %}
+    {% if config['scripts'] is defined %}
+        {% for script in config['scripts'] %}
+        <script type="text/javascript" src="{{ script }}"></script>
+        {% endfor %}
+    {% endif %}
+    <script src="bin/sg-scripts{{ extra['useMinified'] ? '.min' : '' }}.js"></script>
+{% endif %}
+</body>
+</html>

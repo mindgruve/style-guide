@@ -1,0 +1,22 @@
+<ul class="sg-nav sg-navbar-nav sg-navbar-right">
+
+    <li class="sg-dropdown active">
+        <a href="#" class="sg-dropdown-toggle" data-toggle="sg-dropdown">
+            Navigate to an element:
+            <strong class="sg-caret"></strong>
+        </a>
+        <ul class="sg-dropdown-menu sg-scroll-menu">
+            {% for section in config['sections'] %}
+                {% if config[section[0]] is defined %}
+                    <li role="presentation" class="sg-dropdown-header">{{ section[1] }}</li>
+                    {% for file in config[section[0]] %}
+                        <li><a href="#sg-{{ file|sgFilename }}">{{ file|sgTitle|capitalize }}</a></li>
+                    {% endfor %}
+                    {% if not loop.last %}
+                        <li role="presentation" class="sg-divider"></li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </li>
+</ul>
