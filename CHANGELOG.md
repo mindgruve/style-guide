@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.3.4
+- Add gitkeep for markup directory
+
 ## 1.3.3
 - Fix invalid paths set up for twig bug
 
