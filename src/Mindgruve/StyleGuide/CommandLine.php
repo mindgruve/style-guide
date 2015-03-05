@@ -7,10 +7,10 @@ class CommandLine
     static $usage = <<<EOF
 -------------------------------------------------------------------------------
 -------- Mindgruve Style Guide ------------------------------------------------
---
---  Usage
---      generate [path] - generates a style guide. Default action.
---
+--                                                                           --
+--  Usage                                                                    --
+--      generate [path] - generates a style guide. Default action.           --
+--                                                                           --
 -------------------------------------------------------------------------------
 EOF;
 
