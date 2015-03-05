@@ -1,7 +1,7 @@
 {
     "name": "mindgruve/style-guide",
     "description": "This is the custom style guide that Mindgruve can use in any project.",
-    "version": "1.3.4",
+    "version": "1.4.0",
     "authors": [
         {
             "name": "Abishai Gray",
@@ -22,7 +22,7 @@
         }
     },
     "scripts": {
-        "style-guide": "Mindgruve\\StyleGuide\\Generator::commandLine"
+        "style-guide": "Mindgruve\\StyleGuide\\CommandLine::main"
     }
 
 }

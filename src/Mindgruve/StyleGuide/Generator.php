@@ -8,96 +8,83 @@
 
 namespace Mindgruve\StyleGuide;
 
-use Composer\Script\Event;
 use Symfony\Component\Filesystem\Filesystem;
 
 class Generator
 {
-    static $usage = '\
------------------------------------------------------------\
--------- Mindgruve Style Guide ----------------------------\
---                                                         \
---  Usage                                                  \
---      generate - generates a style guide. Default action.\
---                                                         \
------------------------------------------------------------\
-';
-
     private $composer;
 	private $io;
+    private $projectRoot;
 	
 	function __construct($composer, $io) {
 		$this->composer = $composer;
 		$this->io = $io;
-	}
-
-    static public function commandLine(Event $e)
-    {
-        $composer = $e->getComposer();
-        $io = $e->getIO();
-
-        $args = $e->getArguments();
-        $command = @$args[0];
-        switch ($command) {
-            case 'generate':
-                $arg2 = @$args[1];
-                if (!$arg2) {
-                    $io->writeError('ERROR: You must provide a directory to generate the style guide');
-                } else {
-					$generator = new static($composer, $io);
-                    $generator->generate($arg2);
-                }
-                break;
-            default:
-                $io->write(self::$usage . PHP_EOL);
-                break;
+        $this->filesystem = new Filesystem();
+        $this->projectRoot = realpath('.');
+        
+        if ($this->projectRoot === false) {
+            die('You must set up the project dependencies, run the following commands:'.PHP_EOL.
+                'curl -s http://getcomposer.org/installer | php'.PHP_EOL.
+                'php composer.phar install'.PHP_EOL);
         }
-    }
+	}
 
     public function generate($targetDirectory)
 	{
-        $filesystem = new Filesystem();
+        $this->generateConfigfile();
+        $this->generateMiniSite($targetDirectory);
+    }
+    
+    public function generateConfigFile()
+    {
+        $source = '../../../config/mgStyleGuide.default.ini';
+        $dest = $this->projectRoot . '/config/mgStyleGuide.ini';//Mindgruve standard config location
+        
+        if ($this->filesystem->exists($dest)) {
+            $this->io->writeError('Sorry, but ' . realpath($dest) . ' already exists.');
+            return;
+        }
+        
+        $this->filesystem->copy($source, $dest);
+        $this->io->write('A new config file was made at ' . realpath($dest) . ' with the default configuration to get you started.');
+    }
+    
+    public function generateMiniSite($targetDirectory)
+    {
         $path = $targetDirectory;
         
         if (strpos($targetDirectory, '/') === 0) {
             $this->io->writeError('Sorry, you must use a relative install path.');
             return;
         }
-        if ($filesystem->exists($path)) {
+        if ($this->filesystem->exists($path)) {
 			$this->io->writeError('Sorry, but ' . $path . ' already exists in ' . realpath('.'));
             return;
 		}
                 
-        $filesystem->mkdir($path, 0755);
-        $filesystem->mirror(__DIR__ . '/../../../www/bin', $path . '/bin');
-        $filesystem->mkdir($path . '/markup');
-        $projectRoot = $this->findProjectRoot($path, $filesystem);
-        
-        if ($projectRoot === false) {
-            $this->writeError('Could not find the project root.');
-            return;
-        }
-
+        $this->filesystem->mkdir($path, 0755);
+        $this->filesystem->mirror(__DIR__ . '/../../../www/bin', $path . '/bin');
+        $this->filesystem->mkdir($path . '/markup');
         $indexFileContents = $this->getFileContents(__DIR__ . '/../../../www/index.php');
-        $indexFileContents = preg_replace('/\$PROJECT_ROOT = .*;/', '$PROJECT_ROOT = \'' . $projectRoot . '\');', $indexFileContents);
-        $filesystem->dumpFile($path . '/index.php', $indexFileContents);
+        $indexFileContents = preg_replace('/\$PROJECT_ROOT = .*;/', '$PROJECT_ROOT = \'' . $this->projectRoot . '\');', $indexFileContents);
+        $this->filesystem->dumpFile($path . '/index.php', $indexFileContents);
         $this->io->write('A new directory was made at ' . realpath($path) . ' with the style guide site files.');
     }
     
     public function getFileContents($path)
     {
         $realpath = realpath($path);
-        $file = fopen($realpath, 'r') or die('Unable to open file!');
-        $contents = fread($file,filesize($realpath));
+        $file = fopen($realpath, 'r') or die('Unable to open file at location ' . $realpath . '!');
+        $contents = fread($file, filesize($realpath));
         fclose($file);
         return $contents;
     }
     
-    public function findProjectRoot($path, Filesystem $filesystem)
+    public function findProjectRoot($path)
     {
         $searchPath = realpath($path);
         while (true) {
-            if ($filesystem->exists($searchPath . '/composer.json')) {
+            if ($this->filesystem->exists($searchPath . '/composer.json')) {
                 break;
             }
             if ($searchPath == '/') {
