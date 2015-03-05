@@ -4,15 +4,15 @@ namespace Mindgruve\StyleGuide;
 
 class CommandLine
 {
-    static $usage = '\
--------------------------------------------------------------------------------\
--------- Mindgruve Style Guide ------------------------------------------------\
---                                                                             \
---  Usage                                                                      \
---      generate [path] - generates a style guide. Default action.             \
---                                                                             \
--------------------------------------------------------------------------------\
-';
+    static $usage = <<<EOF
+-------------------------------------------------------------------------------
+-------- Mindgruve Style Guide ------------------------------------------------
+--
+--  Usage
+--      generate [path] - generates a style guide. Default action.
+--
+-------------------------------------------------------------------------------
+EOF;
 
     static public function main($e)
     {
