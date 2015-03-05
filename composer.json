@@ -21,8 +21,8 @@
             "Mindgruve\\": "src/Mindgruve"
         }
     },
-    "scripts": {
-        "style-guide": "Mindgruve\\StyleGuide\\CommandLine::main"
-    }
+    "bin": [
+        "style-guide"
+    ]
 
 }

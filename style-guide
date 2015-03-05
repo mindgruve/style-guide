@@ -1,0 +1,56 @@
+#!/usr/bin/env php
+<?php
+/* Mindgruve Style Guide
+ * This cool tech builds a style guide minisite for you!
+ *
+ * This binary file is based on the implementation of the PHPUnit binary
+ */
+
+foreach (array(__DIR__ . '/../../autoload.php', __DIR__ . '/vendor/autoload.php') as $file) {
+    if (file_exists($file)) {
+        define('MGSTYLEGUIDE_COMPOSER_INSTALL', $file);
+        break;
+    }
+}
+
+if (!defined('MGSTYLEGUIDE_COMPOSER_INSTALL')) {
+    die(
+        'You need to set up the project dependencies using the following commands:' . PHP_EOL .
+        'wget http://getcomposer.org/composer.phar' . PHP_EOL .
+        'php composer.phar install' . PHP_EOL
+    );
+}
+
+require MGSTYLEGUIDE_COMPOSER_INSTALL;
+
+class EventShim
+{
+    public function getArguments()
+    {
+        $args = $_SERVER['argv'];
+        array_shift($args);
+        return $args;
+    }
+
+    function getIO()
+    {
+        return new IOShim();
+    }
+}
+
+class IOShim
+{
+    public function write($line)
+    {
+        print $line . PHP_EOL;
+    }
+
+    public function writeError($line)
+    {
+        print $line . PHP_EOL;
+    }
+}
+
+$event = new EventShim();
+
+Mindgruve\StyleGuide\CommandLine::main($eventShim);

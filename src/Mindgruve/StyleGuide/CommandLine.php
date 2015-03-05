@@ -2,25 +2,21 @@
 
 namespace Mindgruve\StyleGuide;
 
-use Composer\Script\Event;
-
 class CommandLine
 {
     static $usage = '\
------------------------------------------------------------\
--------- Mindgruve Style Guide ----------------------------\
---                                                         \
---  Usage                                                  \
---      generate - generates a style guide. Default action.\
---                                                         \
------------------------------------------------------------\
+-------------------------------------------------------------------------------\
+-------- Mindgruve Style Guide ------------------------------------------------\
+--                                                                             \
+--  Usage                                                                      \
+--      generate [path] - generates a style guide. Default action.             \
+--                                                                             \
+-------------------------------------------------------------------------------\
 ';
 
-    static public function main(Event $e)
+    static public function main($e)
     {
-        $composer = $e->getComposer();
         $io = $e->getIO();
-
         $args = $e->getArguments();
         $command = @$args[0];
         switch ($command) {
@@ -29,7 +25,7 @@ class CommandLine
                 if (!$arg2) {
                     $io->writeError('ERROR: You must provide a directory to generate the style guide');
                 } else {
-                    $generator = new Generator($composer, $io);
+                    $generator = new Generator($io);
                     $generator->generate($arg2);
                 }
                 break;

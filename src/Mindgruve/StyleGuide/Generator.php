@@ -12,22 +12,14 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class Generator
 {
-    private $composer;
     private $io;
     private $projectRoot;
 
-    function __construct($composer, $io)
+    function __construct($io)
     {
-        $this->composer = $composer;
         $this->io = $io;
         $this->filesystem = new Filesystem();
         $this->projectRoot = realpath('.');
-
-        if ($this->projectRoot === false) {
-            die('You must set up the project dependencies, run the following commands:' . PHP_EOL .
-                'curl -s http://getcomposer.org/installer | php' . PHP_EOL .
-                'php composer.phar install' . PHP_EOL);
-        }
     }
 
     public function generate($targetDirectory)
