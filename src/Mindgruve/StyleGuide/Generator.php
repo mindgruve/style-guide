@@ -62,7 +62,7 @@ class Generator
         if (file_exists($path)) {
 			$this->io->writeError('Sorry, but ' . $path . ' already exists in ' . realpath('.'));
 		} else {
-           mkdir($path, 655, true);
+           mkdir($path, 0755, true);
 		   $this->io->write('A new directory was made at ' . realpath($path));
         }
     }
