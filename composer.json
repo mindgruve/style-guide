@@ -19,6 +19,9 @@
         "psr-4": {
             "Mindgruve\\": "src/Mindgruve"
         }
+    },
+    "scripts": {
+        "style-guide": "Mindgruve\\StyleGuide\\Generator::commandLine"
     }
 
 }

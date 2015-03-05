@@ -33,10 +33,17 @@ class StyleGuide
 
     private function setupTwig()
     {
+        // ----- SETUP INCLUDE PATHS ----- //
+        $rootPath = realpath(dirname(dirname(__DIR__)));
         $paths = array(
-            realpath(dirname(dirname(__DIR__)) . '/www/markup'),//deprecated
-            realpath(dirname(dirname(__DIR__)) . '/views')
+            $rootPath . '/views'
         );
+
+        //deprecated
+        $deprecatedMarkupDirectory = $rootPath . '/www/markup';
+        if ($deprecatedMarkupDirectory != false) {
+            array_unshift($paths, $deprecatedMarkupDirectory);
+        }
 
         if (array_key_exists('markupPath', $this->configVariables)) {
             array_unshift($paths, $this->configVariables['markupPath']);
@@ -45,6 +52,7 @@ class StyleGuide
         $this->twigLoader = new \Twig_Loader_Filesystem($paths);
         $this->twig = new \Twig_Environment($this->twigLoader);
 
+        // ----- SETUP FILTERS ----- //
         $filenameFilter = new \Twig_SimpleFilter(
             'sgFilename', function ($string) {
             $filenameAndTitle = StyleGuide::getFileNameAndTitle($string);
@@ -63,6 +71,7 @@ class StyleGuide
         );
         $this->twig->addFilter($titleFilter);
 
+        // ----- SETUP TESTS ----- //
         $existsTest = new \Twig_SimpleTest(
             'sgExist', array($this, 'templateExists')
         );
