@@ -15,6 +15,7 @@ class CommandLine
 --                                                         \
 -----------------------------------------------------------\
 ';
+
     static public function main(Event $e)
     {
         $composer = $e->getComposer();
@@ -28,7 +29,7 @@ class CommandLine
                 if (!$arg2) {
                     $io->writeError('ERROR: You must provide a directory to generate the style guide');
                 } else {
-    				$generator = new Generator($composer, $io);
+                    $generator = new Generator($composer, $io);
                     $generator->generate($arg2);
                 }
                 break;

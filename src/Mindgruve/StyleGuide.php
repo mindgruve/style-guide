@@ -120,7 +120,7 @@ class StyleGuide
      * Support loading unique vars from ini
      *
      * @param string $variableName The INI variable to inject
-     * @param string $template     String The template to replace
+     * @param string $template String The template to replace
      *
      * @return string
      */
@@ -152,7 +152,7 @@ class StyleGuide
      * Basic string injection using {0} and a string or {0}...{n} and an array
      *
      * @param string|array $variable The content to inject
-     * @param string       $template The template to replace
+     * @param string $template The template to replace
      *
      * @return string
      */
@@ -183,8 +183,8 @@ class StyleGuide
     /**
      * Display markup view & source
      *
-     * @param string $type       The type of content to display. This looks for a folder named "$type" in the markup directory
-     * @param bool   $showSource Toggle the display of the "View Source" UX
+     * @param string $type The type of content to display. This looks for a folder named "$type" in the markup directory
+     * @param bool $showSource Toggle the display of the "View Source" UX
      */
     function showMarkup($type, $showSource = true)
     {
@@ -193,7 +193,7 @@ class StyleGuide
 
     /**
      * @param string $variable The name of the config variable that has an array of files to display
-     * @param bool   $showSource
+     * @param bool $showSource
      */
     function showConfigMarkup($variable, $showSource = true)
     {
@@ -204,8 +204,8 @@ class StyleGuide
     /**
      * Display html view & source
      *
-     * @param array $files      The files to pull html from
-     * @param bool  $showSource Toggle the display of the "View Source" UX
+     * @param array $files The files to pull html from
+     * @param bool $showSource Toggle the display of the "View Source" UX
      */
     function showHtml($files, $showSource)
     {
