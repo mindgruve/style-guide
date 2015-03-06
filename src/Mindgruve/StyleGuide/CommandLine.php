@@ -9,7 +9,7 @@ class CommandLine
 ---------------------------- Mindgruve Style Guide ----------------------------
 --                                                                           --
 --  Usage                                                                    --
---      generate [path] - generates a style guide. Default action.           --
+--      generate [path] - generates a style guide.                           --
 --                                                                           --
 -------------------------------------------------------------------------------
 EOF;
