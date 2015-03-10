@@ -1,7 +1,7 @@
 {
     "name": "mindgruve/style-guide",
     "description": "This is the custom style guide that Mindgruve can use in any project.",
-    "version": "1.3.4",
+    "version": "1.4.0",
     "authors": [
         {
             "name": "Abishai Gray",
@@ -10,7 +10,8 @@
     ],
     "license": "proprietary",
     "require": {
-        "twig/twig": "~1.18.0"
+        "twig/twig": "~1.18.0",
+        "symfony/filesystem": "~2.6"
     },
     "require-dev": {
         "phpunit/phpunit": "4.0.*"
@@ -19,6 +20,9 @@
         "psr-4": {
             "Mindgruve\\": "src/Mindgruve"
         }
-    }
+    },
+    "bin": [
+        "style-guide"
+    ]
 
 }

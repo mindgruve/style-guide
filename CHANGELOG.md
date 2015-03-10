@@ -1,7 +1,8 @@
 # Changelog
 
-## 1.3.X
+## 1.4.0
 - Add git ignore
+- Add support for a style guide generator
 
 ## 1.3.4
 - Add gitkeep for markup directory

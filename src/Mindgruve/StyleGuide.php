@@ -33,10 +33,17 @@ class StyleGuide
 
     private function setupTwig()
     {
+        // ----- SETUP INCLUDE PATHS ----- //
+        $rootPath = realpath(dirname(dirname(__DIR__)));
         $paths = array(
-            realpath(dirname(dirname(__DIR__)) . '/www/markup'),//deprecated
-            realpath(dirname(dirname(__DIR__)) . '/views')
+            $rootPath . '/views'
         );
+
+        //deprecated
+        $deprecatedMarkupDirectory = $rootPath . '/www/markup';
+        if ($deprecatedMarkupDirectory != false) {
+            array_unshift($paths, $deprecatedMarkupDirectory);
+        }
 
         if (array_key_exists('markupPath', $this->configVariables)) {
             array_unshift($paths, $this->configVariables['markupPath']);
@@ -45,6 +52,7 @@ class StyleGuide
         $this->twigLoader = new \Twig_Loader_Filesystem($paths);
         $this->twig = new \Twig_Environment($this->twigLoader);
 
+        // ----- SETUP FILTERS ----- //
         $filenameFilter = new \Twig_SimpleFilter(
             'sgFilename', function ($string) {
             $filenameAndTitle = StyleGuide::getFileNameAndTitle($string);
@@ -63,6 +71,7 @@ class StyleGuide
         );
         $this->twig->addFilter($titleFilter);
 
+        // ----- SETUP TESTS ----- //
         $existsTest = new \Twig_SimpleTest(
             'sgExist', array($this, 'templateExists')
         );
@@ -111,7 +120,7 @@ class StyleGuide
      * Support loading unique vars from ini
      *
      * @param string $variableName The INI variable to inject
-     * @param string $template     String The template to replace
+     * @param string $template String The template to replace
      *
      * @return string
      */
@@ -143,7 +152,7 @@ class StyleGuide
      * Basic string injection using {0} and a string or {0}...{n} and an array
      *
      * @param string|array $variable The content to inject
-     * @param string       $template The template to replace
+     * @param string $template The template to replace
      *
      * @return string
      */
@@ -174,8 +183,8 @@ class StyleGuide
     /**
      * Display markup view & source
      *
-     * @param string $type       The type of content to display. This looks for a folder named "$type" in the markup directory
-     * @param bool   $showSource Toggle the display of the "View Source" UX
+     * @param string $type The type of content to display. This looks for a folder named "$type" in the markup directory
+     * @param bool $showSource Toggle the display of the "View Source" UX
      */
     function showMarkup($type, $showSource = true)
     {
@@ -184,7 +193,7 @@ class StyleGuide
 
     /**
      * @param string $variable The name of the config variable that has an array of files to display
-     * @param bool   $showSource
+     * @param bool $showSource
      */
     function showConfigMarkup($variable, $showSource = true)
     {
@@ -195,8 +204,8 @@ class StyleGuide
     /**
      * Display html view & source
      *
-     * @param array $files      The files to pull html from
-     * @param bool  $showSource Toggle the display of the "View Source" UX
+     * @param array $files The files to pull html from
+     * @param bool $showSource Toggle the display of the "View Source" UX
      */
     function showHtml($files, $showSource)
     {
