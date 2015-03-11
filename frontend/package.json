@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-clean": "rm -rf www/bin/*",
+    "build-clean": "rm -rf ../www/bin/*",
     "build-dev": "npm run build-dev-css && npm run build-dev-js",
     "build-prod": "npm run build-prod-css && npm run build-prod-js",
     "build-dev-css": "lessc --source-map --compress --include-path=node_modules/bootstrap/less less/sg-styles.less ../www/bin/sg-styles.css",
