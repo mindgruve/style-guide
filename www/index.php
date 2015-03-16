@@ -12,7 +12,7 @@ $config = parse_ini_file($PROJECT_ROOT . '/config/mgStyleGuide.ini');
 //RESOLVE RELATIVE MARKUP PATH
 if (array_key_exists('markupPath', $config)) {
     if (strpos($config['markupPath'], '/') !== 0) {
-        $config['markupPath'] = realpath($PROJECT_ROOT . $config['markupPath']);
+        $config['markupPath'] = realpath($PROJECT_ROOT . '/' . $config['markupPath']);
     }
 }
 //SHOW SOURCE CODE COLLAPSING BLOCK
