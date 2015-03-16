@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.4.2
+- Fix style guide index page markup path bug
+
 ## 1.4.1
 - Fix generator bug with project root
 
