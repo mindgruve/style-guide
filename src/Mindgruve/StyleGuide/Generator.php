@@ -59,7 +59,7 @@ class Generator
         $this->filesystem->mirror(__DIR__ . '/../../../www/bin', $path . '/bin');
         $this->filesystem->mkdir($path . '/markup');
         $indexFileContents = $this->getFileContents(__DIR__ . '/../../../www/index.php');
-        $indexFileContents = preg_replace('/\$PROJECT_ROOT = .*;/', '$PROJECT_ROOT = \'' . $this->projectRoot . '\');', $indexFileContents);
+        $indexFileContents = preg_replace('/\$PROJECT_ROOT = .*;/', '$PROJECT_ROOT = \'' . $this->projectRoot . '\';', $indexFileContents);
         $this->filesystem->dumpFile($path . '/index.php', $indexFileContents);
         $this->io->write('A new directory was made at ' . realpath($path) . ' with the style guide site files.');
     }
