@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.4.1
+- Fix generator bug with project root
+
 ## 1.4.0
 - Add git ignore
 - Add support for a style guide generator
