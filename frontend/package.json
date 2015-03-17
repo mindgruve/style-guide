@@ -1,6 +1,6 @@
 {
   "name": "style-guide",
-  "version": "1.4.2",
+  "version": "1.5.0",
   "description": "These are the dev tools for creating the style guide mini site files.",
   "private": true,
   "main": "index.js",

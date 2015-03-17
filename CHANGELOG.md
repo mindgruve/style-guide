@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.5.0
+- Add basic templating support
+
 ## 1.4.2
 - Fix style guide index page markup path bug
 
