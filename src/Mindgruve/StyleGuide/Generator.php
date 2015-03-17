@@ -56,6 +56,7 @@ class Generator
         }
 
         $this->filesystem->mkdir($path, 0755);
+        $this->filesystem->copy(__DIR__ . '/../../../www/.htaccess', $path . '/.htaccess');
         $this->filesystem->mirror(__DIR__ . '/../../../www/bin', $path . '/bin');
         $this->filesystem->mkdir($path . '/markup');
         $indexFileContents = $this->getFileContents(__DIR__ . '/../../../www/index.php');
