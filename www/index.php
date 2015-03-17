@@ -19,4 +19,12 @@ if (array_key_exists('markupPath', $config)) {
 $showSource = !!@$_GET['dev'] || !!@$_GET['source'];
 
 $styleGuide = new StyleGuide($config);
-echo $styleGuide->render('index', array('showSource' => $showSource, 'useMinified' => true));
+
+$template = array_key_exists('template', $_GET) ? $_GET['template'] : '';
+if ($styleGuide->templateExists($template . '.html')) {
+    echo $styleGuide->render('base', array('static_html' => $template . '.html'));
+} elseif ($styleGuide->templateExists($template . '.html.twig')) {
+    echo $styleGuide->render('base', array('static_html' => $template . '.html.twig'));
+} else {
+    echo $styleGuide->render('index', array('showSource' => $showSource, 'useMinified' => true));
+}
