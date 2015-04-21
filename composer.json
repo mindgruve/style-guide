@@ -10,7 +10,7 @@
     ],
     "license": "proprietary",
     "require": {
-        "twig/twig": "~1.18.0",
+        "twig/twig": "~1.18",
         "symfony/filesystem": "~2.6"
     },
     "require-dev": {
