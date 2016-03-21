@@ -1,7 +1,6 @@
 {
     "name": "mindgruve/style-guide",
     "description": "This is the custom style guide that Mindgruve can use in any project.",
-    "version": "1.5.0",
     "authors": [
         {
             "name": "Abishai Gray",
